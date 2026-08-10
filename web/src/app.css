@@ -1,0 +1,645 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-paper);
+  background: var(--color-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-shell__atmosphere {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(212, 74, 50, 0.18), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(112, 180, 154, 0.16), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(199, 164, 90, 0.12), transparent 40%),
+    linear-gradient(180deg, #0b1f22 0%, var(--color-ink) 55%, #061012 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-shell__atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: radial-gradient(rgba(243, 232, 207, 0.5) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+.app-shell__column {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--column-max));
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-4) calc(var(--space-7) + 1rem);
+}
+
+.app-shell__main {
+  flex: 1;
+}
+
+.bottom-nav {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  padding: var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: rgba(8, 23, 26, 0.88);
+  backdrop-filter: blur(10px);
+}
+
+.bottom-nav__link {
+  min-height: var(--tap-min);
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--color-muted);
+  transition: background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.bottom-nav__link.is-active,
+.bottom-nav__link[aria-current='page'] {
+  color: var(--color-ink);
+  background: var(--color-gold);
+  font-weight: 500;
+}
+
+.page {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.page-header {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.brand-kicker,
+.soft-panel__label,
+.natal-strip__label,
+.mansion-card__eyebrow {
+  margin: 0;
+  color: var(--color-gold);
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.brand-title,
+.page-header h1,
+.mansion-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.brand-title {
+  font-size: clamp(2.4rem, 8vw, 3.4rem);
+}
+
+.page-header h1 {
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
+}
+
+.page-lead,
+.mansion-card__meta,
+.mansion-card__note,
+.natal-strip__note,
+.result-count,
+.disclaimer,
+.prompt-echo {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.panel,
+.mansion-card,
+.soft-panel,
+.natal-strip {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-soft);
+}
+
+.panel,
+.soft-panel,
+.reveal-panel,
+.natal-strip {
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field__label {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+}
+
+.field input,
+.field select {
+  min-height: var(--tap-min);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line);
+  background: rgba(8, 23, 26, 0.7);
+  color: var(--color-paper);
+}
+
+.calendar-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  padding: 0.3rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: rgba(8, 23, 26, 0.45);
+}
+
+.calendar-mode__btn {
+  min-height: var(--tap-min);
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-paper);
+  cursor: pointer;
+}
+
+.calendar-mode__btn--active {
+  background: linear-gradient(135deg, rgba(196, 149, 74, 0.35), rgba(167, 53, 36, 0.35));
+  color: var(--color-gold);
+}
+
+.lunar-fields {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.lunar-fields__row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.leap-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: var(--tap-min);
+  color: var(--color-paper);
+}
+
+.leap-check input {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.field-hint {
+  margin: 0;
+  color: rgba(244, 236, 216, 0.7);
+  font-size: 0.85rem;
+}
+
+.form-error {
+  margin: 0;
+  color: var(--color-cinnabar);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--color-cinnabar), #a73524);
+  color: var(--color-paper);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-gold);
+  color: var(--color-paper);
+}
+
+.cta-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 480px) {
+  .cta-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.text-action {
+  justify-self: start;
+  min-height: var(--tap-min);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-jade);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.sigil-stage {
+  display: grid;
+  place-items: center;
+  padding: var(--space-3) 0;
+}
+
+.mansion-sigil {
+  width: min(220px, 70vw);
+}
+
+.mansion-sigil__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.mansion-sigil__ring {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 1.5;
+  stroke-opacity: 0.55;
+}
+
+.mansion-sigil__ring--inner {
+  stroke-dasharray: 4 6;
+  stroke-opacity: 0.35;
+}
+
+.mansion-sigil__stars circle {
+  fill: var(--color-paper);
+  opacity: 0.75;
+}
+
+.mansion-sigil__mark {
+  fill: var(--color-jade);
+  font-size: 10px;
+  font-family: var(--font-display);
+}
+
+.mansion-sigil__core {
+  fill: rgba(8, 23, 26, 0.85);
+  stroke: var(--color-cinnabar);
+  stroke-width: 1.5;
+}
+
+.mansion-sigil__glyph {
+  fill: var(--color-paper);
+  font-size: 42px;
+  font-family: var(--font-display);
+  transform-origin: 100px 100px;
+}
+
+.mansion-card__body {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+  text-align: center;
+}
+
+.mansion-card__copy {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.mansion-card__line,
+.modern-reading {
+  margin: 0;
+}
+
+.mansion-card__layers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.layer-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid var(--color-line);
+}
+
+.layer-badge--传统民俗 {
+  color: var(--color-gold);
+}
+
+.layer-badge--现代创作 {
+  color: var(--color-jade);
+}
+
+.yi-ji {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.yi-ji strong {
+  color: var(--color-gold);
+  margin-right: var(--space-2);
+}
+
+.natal-strip__value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.filter-tabs__btn {
+  min-height: var(--tap-min);
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.filter-tabs__btn.is-active,
+.filter-tabs__btn[aria-pressed='true'] {
+  background: var(--color-teal);
+  color: var(--color-paper);
+  border-color: var(--color-gold);
+}
+
+.gallery-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.gallery-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  min-height: 14.5rem;
+  padding: 0;
+  isolation: isolate;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-soft);
+  transition: border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.gallery-card:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.gallery-card__copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--space-4);
+  pointer-events: none;
+}
+
+.gallery-card__glyph {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-gold);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+}
+
+.gallery-card__name {
+  font-family: var(--font-display);
+  color: var(--color-paper);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.gallery-card__meta {
+  color: rgba(243, 232, 207, 0.78);
+  font-size: 0.85rem;
+}
+
+.sculpture-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1a2a2c, #0a1416 70%);
+}
+
+.sculpture-backdrop__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 420ms var(--ease-out);
+}
+
+.gallery-card:hover .sculpture-backdrop__image {
+  transform: scale(1.06);
+}
+
+.sculpture-backdrop[data-fit='contain'] .sculpture-backdrop__image {
+  object-fit: contain;
+  object-position: center;
+  background: #0a1416;
+}
+
+.sculpture-backdrop__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8, 23, 26, 0.05) 20%, rgba(8, 23, 26, 0.88) 100%),
+    radial-gradient(circle at 50% 20%, transparent 35%, rgba(8, 23, 26, 0.35) 100%);
+  pointer-events: none;
+}
+
+.sculpture-backdrop__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: var(--space-2);
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(199, 164, 90, 0.18), transparent 55%),
+    linear-gradient(165deg, #1c3332, #0b1718);
+}
+
+.palace-青龙 .sculpture-backdrop__placeholder {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(112, 180, 154, 0.22), transparent 50%),
+    linear-gradient(165deg, #16312c, #0b1718);
+}
+
+.palace-玄武 .sculpture-backdrop__placeholder {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(90, 130, 180, 0.22), transparent 50%),
+    linear-gradient(165deg, #142432, #0b1718);
+}
+
+.palace-白虎 .sculpture-backdrop__placeholder {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(210, 190, 150, 0.2), transparent 50%),
+    linear-gradient(165deg, #2a261c, #0b1718);
+}
+
+.palace-朱雀 .sculpture-backdrop__placeholder {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(212, 74, 50, 0.22), transparent 50%),
+    linear-gradient(165deg, #2c1a18, #0b1718);
+}
+
+.sculpture-backdrop__glyph {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: rgba(243, 232, 207, 0.88);
+}
+
+.sculpture-backdrop__hint {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(199, 164, 90, 0.75);
+}
+
+.sculpture-credit {
+  margin: 0;
+  color: rgba(243, 232, 207, 0.45);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.detail-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  min-height: 18rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.detail-hero .sculpture-backdrop {
+  position: absolute;
+}
+
+.detail-hero__caption {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: var(--space-2);
+  min-height: 18rem;
+  align-content: end;
+  padding: var(--space-5);
+}
+
+.detail-hero__caption h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+.detail-hero__caption p {
+  margin: 0;
+  color: rgba(243, 232, 207, 0.82);
+}
+
+.detail-page .mansion-card__layers {
+  justify-content: flex-start;
+}

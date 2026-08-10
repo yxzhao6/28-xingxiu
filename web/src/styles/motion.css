@@ -1,0 +1,53 @@
+.mansion-sigil__ring {
+  transition: transform var(--duration-reveal) var(--ease-out),
+    stroke-opacity var(--duration-reveal) var(--ease-out);
+  transform-origin: 100px 100px;
+}
+
+.mansion-sigil.is-awakened .mansion-sigil__ring {
+  transform: rotate(18deg);
+  stroke-opacity: 1;
+}
+
+.mansion-sigil.is-awakened .mansion-sigil__glyph {
+  animation: awaken-pulse var(--duration-reveal) var(--ease-out);
+}
+
+.reveal-panel {
+  animation: fade-rise var(--duration-reveal) var(--ease-out);
+}
+
+@keyframes awaken-pulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.86);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

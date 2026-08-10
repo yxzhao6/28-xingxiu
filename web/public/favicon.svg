@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" stroke="#C7A45A" stroke-width="2"/>
+  <circle cx="32" cy="32" r="18" stroke="#D44A32" stroke-width="2"/>
+  <text x="32" y="38" text-anchor="middle" fill="#F3E8CF" font-size="18" font-family="serif">宿</text>
+</svg>
